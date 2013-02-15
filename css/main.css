@@ -4,8 +4,7 @@
 
 .example-canvas
 {
-	width: 100%;
-	height: 100%;
+	
 }
 
 div.source
@@ -16,10 +15,21 @@ div.source
 	height: 400px;*/
 }
 
+div.canvas-div
+{
+	height: 300px;
+}
+
+.btn-sidebar
+{
+	margin-bottom: 5px;
+}
 
 
-
-
+div.seperator
+{
+	margin-bottom: 50px;
+}
 
 
 

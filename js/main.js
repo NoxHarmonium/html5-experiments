@@ -11,6 +11,7 @@ var canvasExamples =
 		var description	= $("<div class='row-fluid'><div class='span11'><h3></h3><p class='description'></p><br></div><div class='span1'/></div>");
 		description.find("p").text(options.description);
 		description.find("h3").text(options.title);
+		description.find("h3").attr("id","heading_"+ options.id);
 				
 		var divCanvas  	= $("<div class='span5'></div>");
 		var divICanvas	= $("<div class='canvas-div'>");

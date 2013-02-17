@@ -11,6 +11,9 @@ var canvasExamples =
 		
 		var heading 	= $("<h3></h3>");	
 		heading.text(options.title);
+	
+		var description	= $("<div class='row-fluid'><div class='span11'><p class='description'></p><br></div><div class='span1'/></div>");
+		description.find("p").text(options.description);
 		
 		var divCanvas  	= $("<div class='span5'></div>");
 		var divICanvas	= $("<div class='canvas-div'>");
@@ -46,8 +49,9 @@ var canvasExamples =
 		row.append(divToolbar);
 			
 		$(options.parent).find("footer").before(heading);	
-		$(options.parent).find("footer").before(row);	
-		//$(options.parent).find("footer").before(divSep);	
+		$(options.parent).find("footer").before(description);	
+		$(options.parent).find("footer").before(row);
+		$(options.parent).find("footer").before(divSep);		
 		
 		this[options.id] = {
 			canvas: canvas,
@@ -56,6 +60,7 @@ var canvasExamples =
 				mode:  "javascript"
 			}),
 			source: options.source,
+			js_data: ""
 		};
 
 		canvasExamples.ids.push(options.id);
@@ -63,28 +68,47 @@ var canvasExamples =
 
 		btnRun.click(function () {
 			var eId = $(this).prop("data-exampleId");
+			canvasExamples.loadFromEditor(eId);
 			canvasExamples.execute(eId);
 		});
+
 		btnReset.click(function () {
 			var eId = $(this).prop("data-exampleId");
+			canvasExamples.loadFromEditor(eId);
 			canvasExamples.reset(eId);
 		});			
 		
-		this.reset(options.id);
-		
-		
-		
+		btnFS.click(function () {
+			var eId = $(this).prop("data-exampleId");
+			canvasExamples.fullscreenToggle(eId);
+		});		
+		this.reset(options.id);		
+	},
+
+	loadFromEditor: function(id)
+	{
+		var editor = canvasExamples[id].editor;
+		canvasExamples[id].js_data = editor.getValue();
 	},
 	
 	execute: function(id)
 	{
-		console.log('Execute called on #' + id);
 		var canvas = canvasExamples[id].canvas;
 		var editor = canvasExamples[id].editor;
-		var code = editor.getValue();		
+		var code = canvasExamples[id].js_data;
 
+		eval(code + "draw(canvas);");			
+	},
 
-		var draw = eval(code + "draw(canvas);");	
+	fullscreenToggle: function(id)
+	{
+		var domCanvas = canvasExamples[id].canvas.parent()[0];
+		var request = domCanvas.requestFullScreen || domCanvas.webkitRequestFullScreen || domCanvas.mozRequestFullScreen;
+		//var cancel = domCanvas.cancelFullScreen || domCanvas.webkitCancelFullScreen || domCanvas.mozCancelFullScreen;
+	
+		request.call(domCanvas);
+		domCanvas.fullscreen = true;
+		canvasExamples.execute(id);
 		
 	},
 	
@@ -99,21 +123,6 @@ var canvasExamples =
 		editor.readOnly = true;		
 		
 		editor.setValue("Loading...");
-		/*
-		$.ajax(source).done(function(data, textStatus, jqxhr) {
-			console.log(data); //data returned
-			console.log(textStatus); //success
-			console.log(jqxhr.status); //200
-			console.log('Load was performed.');	
-
-			if (textStatus == "success")
-			{
-				editor.setValue(data);
-				canvasExamples.execute(id);				
-				editor.readOnly = false;
-			}
-		});
-		*/
 		
 		function process()
 		{
@@ -121,6 +130,7 @@ var canvasExamples =
 			var data = xhr.response;
 			
 			editor.setValue(data);
+			canvasExamples[id].js_data = data;
 			canvasExamples.execute(id);				
 			editor.readOnly = false;
 		  }
@@ -136,20 +146,17 @@ var canvasExamples =
 	
 	refresh: function()
 	{
-		for (var i = 0; i < canvasExamples.length; i++)
+		for (var i = 0; i < canvasExamples.ids.length; i++)
 		{
 			canvasExamples.execute(canvasExamples.ids[i]);
 		}
-	}
-	
-	
-
-
+	}	
 }
 
 canvasExamples.add({
 	title: "Hello World!",
 	id: "helloWorld",
+	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel turpis id eros ultrices sagittis. Sed convallis mi non erat faucibus posuere. Vestibulum libero nibh, sollicitudin a lobortis et, pulvinar vitae ligula. Nunc tortor dolor, scelerisque sed eleifend vel, interdum id lorem. Pellentesque non massa ac mi congue iaculis. Fusce dignissim, leo ut suscipit accumsan, lectus neque vehicula enim, id placerat dui eros sed mi. Suspendisse vel felis lorem. Etiam felis sem, blandit sit amet egestas eget, hendrerit sed sem. Sed augue elit, ornare quis vestibulum porttitor, feugiat eu augue.",
 	parent: $('#exampleContainer'),
 	source: "js/examples/helloworld.js"
 });
@@ -157,6 +164,7 @@ canvasExamples.add({
 canvasExamples.add({
 	title: "Basic Gradients",
 	id: "gradients",
+	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel turpis id eros ultrices sagittis. Sed convallis mi non erat faucibus posuere. Vestibulum libero nibh, sollicitudin a lobortis et, pulvinar vitae ligula. Nunc tortor dolor, scelerisque sed eleifend vel, interdum id lorem. Pellentesque non massa ac mi congue iaculis. Fusce dignissim, leo ut suscipit accumsan, lectus neque vehicula enim, id placerat dui eros sed mi. Suspendisse vel felis lorem. Etiam felis sem, blandit sit amet egestas eget, hendrerit sed sem. Sed augue elit, ornare quis vestibulum porttitor, feugiat eu augue.",
 	parent: $('#exampleContainer'),
 	source: "js/examples/gradients.js"
 });
@@ -164,6 +172,7 @@ canvasExamples.add({
 canvasExamples.add({
 	title: "Adding Some Code",
 	id: "gradientsCode",
+	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel turpis id eros ultrices sagittis. Sed convallis mi non erat faucibus posuere. Vestibulum libero nibh, sollicitudin a lobortis et, pulvinar vitae ligula. Nunc tortor dolor, scelerisque sed eleifend vel, interdum id lorem. Pellentesque non massa ac mi congue iaculis. Fusce dignissim, leo ut suscipit accumsan, lectus neque vehicula enim, id placerat dui eros sed mi. Suspendisse vel felis lorem. Etiam felis sem, blandit sit amet egestas eget, hendrerit sed sem. Sed augue elit, ornare quis vestibulum porttitor, feugiat eu augue.",
 	parent: $('#exampleContainer'),
 	source: "js/examples/gradientsCode.js"
 });

@@ -12,11 +12,12 @@ function draw(canvas)
     grad.addColorStop(0, '#FF0000');   
     grad.addColorStop(1, '#0000FF');
     ctx.fillStyle = grad;
-	var offsetX = 100;
-	var offsetY = 30;
+	var offsetX = canvas.width() * 0.3;
+	var offsetY = canvas.height() * 0.2;
+	var step = (canvas.width() * 0.4) * 0.2;
 	for (var i = 0; i < 5; i++)
 	{
-		ctx.fillRect((i*50)+offsetX,(i*50)+offsetY,50,50);		
+		ctx.fillRect((i*step)+offsetX,(i*step)+offsetY,step,step);		
 	}
 }
 

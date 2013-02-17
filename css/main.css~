@@ -4,22 +4,49 @@
 
 .example-canvas
 {
-	width: 100%;
-	height: 100%;
+	
 }
 
 div.source
 {
 	border: 1px #DDDDDD solid;
 	/*padding: 10px;*/
-	max-height: 400px;
-	height: 400px;
+	/*max-height: 400px;
+	height: 400px;*/
+}
+
+div.canvas-div
+{
+	height: 350px;
+}
+
+div.CodeMirror
+{
+	height: 350px;
+}
+
+.btn-sidebar
+{
+	margin-bottom: 5px;
 }
 
 
+div.seperator
+{
+	margin-bottom: 50px;
+}
+
+p.description
+{
+	padding: 10px;
+}
 
 
-
+div.canvas-div:-webkit-full-screen	{ width: 100%; height: 100%;}
+div.canvas-div:-moz-full-screen		{ width: 100%; height: 100%;}
+div.canvas-div:-ms-full-screen		{ width: 100%; height: 100%; }
+div.canvas-div:-o-full-screen		{ width: 100%; height: 100%;}
+div.canvas-div:full-screen			{ width: 100%; height: 100%;}
 
 
 

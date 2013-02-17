@@ -12,7 +12,8 @@ function draw(canvas)
     grad.addColorStop(0, '#FF0000');   
     grad.addColorStop(1, '#0000FF');
     ctx.fillStyle = grad;
-	ctx.fillRect(130,80,150,150);
+	ctx.fillRect(canvas.width() * 0.25,canvas.height() * 0.25,
+		canvas.width()*0.5,canvas.height()*0.5);
 }
 
 

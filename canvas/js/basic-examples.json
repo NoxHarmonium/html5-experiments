@@ -1,0 +1,27 @@
+{
+	"title" : "Basic Examples",
+	"src" 	: "/basic.html",	
+	"examples" : [
+		{
+			"title": "Hello World!",
+			"id": "helloWorld",
+			"description": "For the first example we will start by drawing the ubiquitous message \"Hello World!\" to the screen. ",
+			"source": "js/examples/helloworld.js"
+		},
+
+		{
+			"title": "Basic Gradients",
+			"id": "gradients",
+			"description": "",
+			"source": "js/examples/gradients.js"
+		},
+
+		{
+			"title": "Adding Some Code",
+			"id": "gradientsCode",
+			"description": "",
+			"source": "js/examples/gradientsCode.js"
+		}
+	]
+}
+

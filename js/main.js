@@ -1,5 +1,4 @@
 "use strict" 
-
 var canvasExamples = 
 {
 	resetColour: "#EEEEEE",
@@ -8,13 +7,11 @@ var canvasExamples =
 	add: function(options)
 	{
 		var row 		= $("<div class='row-fluid'>");
-		
-		var heading 	= $("<h3></h3>");	
-		heading.text(options.title);
-	
-		var description	= $("<div class='row-fluid'><div class='span11'><p class='description'></p><br></div><div class='span1'/></div>");
+
+		var description	= $("<div class='row-fluid'><div class='span11'><h3></h3><p class='description'></p><br></div><div class='span1'/></div>");
 		description.find("p").text(options.description);
-		
+		description.find("h3").text(options.title);
+				
 		var divCanvas  	= $("<div class='span5'></div>");
 		var divICanvas	= $("<div class='canvas-div'>");
 		var canvas 		= $("<canvas class='example-canvas'/>");	
@@ -48,10 +45,11 @@ var canvasExamples =
 		row.append(divEditor);
 		row.append(divToolbar);
 			
-		$(options.parent).find("footer").before(heading);	
 		$(options.parent).find("footer").before(description);	
 		$(options.parent).find("footer").before(row);
-		$(options.parent).find("footer").before(divSep);		
+		$(options.parent).find("footer").before(divSep);	
+
+	
 		
 		this[options.id] = {
 			canvas: canvas,
@@ -153,33 +151,8 @@ var canvasExamples =
 	}	
 }
 
-canvasExamples.add({
-	title: "Hello World!",
-	id: "helloWorld",
-	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel turpis id eros ultrices sagittis. Sed convallis mi non erat faucibus posuere. Vestibulum libero nibh, sollicitudin a lobortis et, pulvinar vitae ligula. Nunc tortor dolor, scelerisque sed eleifend vel, interdum id lorem. Pellentesque non massa ac mi congue iaculis. Fusce dignissim, leo ut suscipit accumsan, lectus neque vehicula enim, id placerat dui eros sed mi. Suspendisse vel felis lorem. Etiam felis sem, blandit sit amet egestas eget, hendrerit sed sem. Sed augue elit, ornare quis vestibulum porttitor, feugiat eu augue.",
-	parent: $('#exampleContainer'),
-	source: "js/examples/helloworld.js"
-});
 
-canvasExamples.add({
-	title: "Basic Gradients",
-	id: "gradients",
-	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel turpis id eros ultrices sagittis. Sed convallis mi non erat faucibus posuere. Vestibulum libero nibh, sollicitudin a lobortis et, pulvinar vitae ligula. Nunc tortor dolor, scelerisque sed eleifend vel, interdum id lorem. Pellentesque non massa ac mi congue iaculis. Fusce dignissim, leo ut suscipit accumsan, lectus neque vehicula enim, id placerat dui eros sed mi. Suspendisse vel felis lorem. Etiam felis sem, blandit sit amet egestas eget, hendrerit sed sem. Sed augue elit, ornare quis vestibulum porttitor, feugiat eu augue.",
-	parent: $('#exampleContainer'),
-	source: "js/examples/gradients.js"
-});
 
-canvasExamples.add({
-	title: "Adding Some Code",
-	id: "gradientsCode",
-	description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel turpis id eros ultrices sagittis. Sed convallis mi non erat faucibus posuere. Vestibulum libero nibh, sollicitudin a lobortis et, pulvinar vitae ligula. Nunc tortor dolor, scelerisque sed eleifend vel, interdum id lorem. Pellentesque non massa ac mi congue iaculis. Fusce dignissim, leo ut suscipit accumsan, lectus neque vehicula enim, id placerat dui eros sed mi. Suspendisse vel felis lorem. Etiam felis sem, blandit sit amet egestas eget, hendrerit sed sem. Sed augue elit, ornare quis vestibulum porttitor, feugiat eu augue.",
-	parent: $('#exampleContainer'),
-	source: "js/examples/gradientsCode.js"
-});
-
-$(window).resize(function() {
-  canvasExamples.refresh();
-});
 
 
 

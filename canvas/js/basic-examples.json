@@ -6,21 +6,24 @@
 			"title": "Hello World!",
 			"id": "helloWorld",
 			"description": "For the first example we will start by drawing the ubiquitous message \"Hello World!\" to the screen. ",
-			"source": "js/examples/helloworld.js"
+			"source": "js/examples/helloworld.js",
+			"autorun": false
 		},
 
 		{
 			"title": "Basic Gradients",
 			"id": "gradients",
 			"description": "",
-			"source": "js/examples/gradients.js"
+			"source": "js/examples/gradients.js",
+			"autorun": false
 		},
 
 		{
 			"title": "Adding Some Code",
 			"id": "gradientsCode",
 			"description": "",
-			"source": "js/examples/gradientsCode.js"
+			"source": "js/examples/gradientsCode.js",
+			"autorun": false
 		}
 	]
 }

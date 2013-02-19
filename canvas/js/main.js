@@ -28,18 +28,21 @@ var canvasExamples =
 		
 		var divToolbar 	= $("<div class='span1'></div>");
 		var btnRun 		= $("<a class='btn btn-sidebar' alt='Run'><i class='icon-play'></i></a>");
-		var btnReset 	= $("<a class='btn btn-sidebar' alt='Reset'><i class='icon-refresh'></i></a>");
+		var btnReset 	= $("<a class='btn btn-sidebar' alt='Reload'><i class='icon-download-alt'></i></a>");
 		var btnFS		= $("<a class='btn btn-sidebar' alt='Fullscreen'><i class='icon-fullscreen'></i></a>");
+		var btnStop		= $("<a class='btn btn-sidebar' alt='Stop'><i class='icon-remove'></i></a>");
 		btnRun.prop("data-exampleId",options.id);
 		btnReset.prop("data-exampleId",options.id);
 		btnFS.prop("data-exampleId",options.id);
-		
+		btnStop.prop("data-exampleId",options.id);
 		
 		var divSep		= $("<div class='seperator'></div>");
 		
 		divToolbar.append(btnRun);
+		divToolbar.append(btnStop);
 		divToolbar.append(btnReset);
 		divToolbar.append(btnFS);
+
 		
 		
 		row.append(divCanvas);
@@ -59,7 +62,8 @@ var canvasExamples =
 				mode:  "javascript"
 			}),
 			source: options.source,
-			js_data: ""
+			js_data: "",
+			active: false
 		};
 
 		canvasExamples.ids.push(options.id);
@@ -74,14 +78,22 @@ var canvasExamples =
 		btnReset.click(function () {
 			var eId = $(this).prop("data-exampleId");
 			canvasExamples.loadFromEditor(eId);
-			canvasExamples.reset(eId);
+			canvasExamples.reload(eId);
 		});			
 		
 		btnFS.click(function () {
 			var eId = $(this).prop("data-exampleId");
 			canvasExamples.fullscreenToggle(eId);
+		});
+
+		btnStop.click(function () {
+			var eId = $(this).prop("data-exampleId");
+			canvasExamples.reset(eId);
 		});		
+
+		this.reload(options.id,options.autorun);
 		this.reset(options.id);		
+	
 	},
 
 	loadFromEditor: function(id)
@@ -96,7 +108,9 @@ var canvasExamples =
 		var editor = canvasExamples[id].editor;
 		var code = canvasExamples[id].js_data;
 
-		eval(code + "draw(canvas);");			
+		eval(code + "draw(canvas);");
+
+		canvasExamples[id].active = true;		
 	},
 
 	fullscreenToggle: function(id)
@@ -107,18 +121,28 @@ var canvasExamples =
 	
 		request.call(domCanvas);
 		domCanvas.fullscreen = true;
-		canvasExamples.execute(id);
+		if (canvasExamples[id].active)
+			canvasExamples.execute(id);
+		else
+			canvasExamples.reset(id);
 		
 	},
+
+	reset : function(id)
+	{
+		var canvas = canvasExamples[id].canvas;
+		helper.clear(canvas,canvasExamples.resetColour);
+
+		canvasExamples[id].active = false;		
+	},
 	
-	reset: function(id)
+	reload: function(id, execute)
 	{
 		var canvas = canvasExamples[id].canvas;
 		var editor = canvasExamples[id].editor;
 		var source = canvasExamples[id].source;	
 
-		helper.clear(canvas, canvasExamples.resetColour);	
-		
+				
 		editor.readOnly = true;		
 		
 		editor.setValue("Loading...");
@@ -130,7 +154,10 @@ var canvasExamples =
 			
 			editor.setValue(data);
 			canvasExamples[id].js_data = data;
-			canvasExamples.execute(id);				
+			if (execute)
+			{
+				canvasExamples.execute(id);				
+			}
 			editor.readOnly = false;
 		  }
 		}
@@ -147,7 +174,11 @@ var canvasExamples =
 	{
 		for (var i = 0; i < canvasExamples.ids.length; i++)
 		{
-			canvasExamples.execute(canvasExamples.ids[i]);
+			var id = canvasExamples.ids[i];
+			if (canvasExamples[id].active)
+				canvasExamples.execute(id);
+			else
+				canvasExamples.reset(id);
 		}
 	}	
 }

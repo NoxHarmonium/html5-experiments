@@ -11,6 +11,8 @@ var helper =
 		// If you set the style to a certain size or 
 		// percentage without setting the canvas properties
 		// it will scale and look blurry.
+		console.log("Parent width: " + canvas.parent().width() + 
+					"Canvas width: " + canvas.width());
 		canvas.prop('width',canvas.parent().width());
 		canvas.prop('height',canvas.parent().height());
 		

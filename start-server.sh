@@ -5,7 +5,7 @@
 # 	by detecting your python version.
 #
 
-command -v pfython >/dev/null 2>&1 || 
+command -v python >/dev/null 2>&1 || 
 { 
 	echo >&2 "You need to install python for this script to work."; 
 	exit 1; 

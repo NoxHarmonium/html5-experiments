@@ -1,6 +1,6 @@
 {
 	"title" : "Basic Examples",
-	"src" 	: "/basic.html",	
+	"src" 	: "basic.html",	
 	"examples" : [
 		{
 			"title": "Hello World!",

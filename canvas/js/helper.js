@@ -3,6 +3,7 @@
 ///
 /// Functions to help with HTML5 canvas drawing.
 ///
+"use strict"
 var helper = 
 {
 	clear: function (canvas, color) {
@@ -27,16 +28,40 @@ var helper =
 		
 		if (color)
 		{
+			var old = ctx.fillStyle;			
 			ctx.fillStyle=color;			
 			ctx.fillRect(0, 0, canvas.width(), canvas.height());
+			ctx.fillStyle = old;
 		}
 		else
 		{	
 			ctx.clearRect(0, 0, canvas.width(), canvas.height());
 		}
 
+		
+		var old = ctx.strokeStyle;
+		ctx.strokeStyle = "1px #000000";			
+		ctx.strokeRect(0, 0, canvas.width(), canvas.height());	
+		ctx.strokeStyle = old;
+	
+
 		// Restore the transform
 		ctx.restore();
+	},
+
+	setupAnimation : function()
+	{
+		window.requestAnimFrame = (function(){
+		  return  window.requestAnimationFrame       ||
+				  window.webkitRequestAnimationFrame ||
+				  window.mozRequestAnimationFrame    ||
+				  window.oRequestAnimationFrame      ||
+				  window.msRequestAnimationFrame     ||
+				  function( callback ){
+				    window.setTimeout(callback, 1000 / 60);
+				  };
+		})();
 	}
+	
 	
 }

@@ -1,26 +1,12 @@
 {
 	"title" : "Animation Examples",
-	"src" 	: "/animation.html",	
+	"src" 	: "animation.html",	
 	"examples" : [
 		{
-			"title": "Hello World!",
-			"id": "helloWorld",
-			"description": "For the first example we will start by drawing the ubiquitous message \"Hello World!\" to the screen. ",
-			"source": "js/examples/helloworld.js"
-		},
-
-		{
-			"title": "Basic Gradients",
-			"id": "gradients",
-			"description": "",
-			"source": "js/examples/gradients.js"
-		},
-
-		{
-			"title": "Adding Some Code",
-			"id": "gradientsCode",
-			"description": "",
-			"source": "js/examples/gradientsCode.js"
+			"title": "Basic Animation",
+			"id": "basicAnimation",
+			"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget sodales est. Quisque magna odio, hendrerit ac iaculis vitae, dictum ut massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras aliquam arcu et orci fringilla molestie. Mauris mattis, massa vitae tempor ullamcorper, velit lorem sollicitudin odio, in interdum lectus sem nec mi. ",
+			"source": "js/examples/basicAnimation.js"
 		}
 	]
 }

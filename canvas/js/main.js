@@ -27,10 +27,21 @@ var canvasExamples =
 		divEditor.append(divIEditor);
 		
 		var divToolbar 	= $("<div class='span1'></div>");
-		var btnRun 		= $("<a class='btn btn-sidebar' alt='Run'><i class='icon-play'></i></a>");
-		var btnReset 	= $("<a class='btn btn-sidebar' alt='Reload'><i class='icon-download-alt'></i></a>");
-		var btnFS		= $("<a class='btn btn-sidebar' alt='Fullscreen'><i class='icon-fullscreen'></i></a>");
-		var btnStop		= $("<a class='btn btn-sidebar' alt='Stop'><i class='icon-remove'></i></a>");
+		var btnRun 		= $("<a class='btn btn-sidebar' alt='Run' data-title='Execute the code.' data=><i class='icon-play'></i></a>");
+		var btnReset 	= $("<a class='btn btn-sidebar' alt='Reload' data-title='Reload the example code.'><i class='icon-download-alt'></i></a>");
+		var btnFS		= $("<a class='btn btn-sidebar' alt='Fullscreen' data-title='View the canvas fullscreen (executes the code).'><i class='icon-fullscreen'></i></a>");
+		var btnStop		= $("<a class='btn btn-sidebar' alt='Stop' data-title='Stop running any code and clear the canvas.'><i class='icon-remove'></i></a>");
+		
+		var tooltipOptions =
+		{
+			placement: 'left'			
+		};
+		
+		btnRun.tooltip(tooltipOptions);
+		btnReset.tooltip(tooltipOptions);
+		btnFS.tooltip(tooltipOptions);
+		btnStop.tooltip(tooltipOptions);	
+		
 		btnRun.prop("data-exampleId",options.id);
 		btnReset.prop("data-exampleId",options.id);
 		btnFS.prop("data-exampleId",options.id);
@@ -149,17 +160,25 @@ var canvasExamples =
 		
 		function process()
 		{
-		  if (xhr.readyState == 4) {
-			var data = xhr.response;
-			
-			editor.setValue(data);
-			canvasExamples[id].js_data = data;
-			if (execute)
+		  if (xhr.status === 200)
 			{
-				canvasExamples.execute(id);				
+				if (xhr.readyState == 4) {
+					var data = xhr.response;
+					
+					editor.setValue(data);
+					canvasExamples[id].js_data = data;
+					if (execute)
+					{
+						canvasExamples.execute(id);				
+					}
+					editor.readOnly = false;
+				}
 			}
-			editor.readOnly = false;
-		  }
+			else
+			{
+				editor.setValue("Error loading '" + source + "'\nError Code: " + xhr.status);
+				canvasExamples[id].js_data = data;
+			}	
 		}
 		
 		var xhr = new XMLHttpRequest();

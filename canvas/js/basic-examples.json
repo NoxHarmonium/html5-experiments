@@ -5,7 +5,7 @@
 		{
 			"title": "My First Canvas",
 			"id": "myFirstCanvas",
-			"description": "",
+			"description": "This first example is a bit boring as it just draws a rectangle the size of the canvas, but it does introduce you to the building blocks of these tutorials. The draw function is filled in for you which is executed when you click the <i class='icon-play'></i> button. The helper object is provided for these tutorials to make the code examples a bit neater. You can have a look at the code behind the helper function <a href='js/helper.js'>here</a> if you're curious, but for now it's probably best to just know that it sets everything up for the tutorial. An important thing to note is that you don't perform javascript operations on the canvas reference but on a context object you get from the canvas using <code>canvas[0].getContext(&quot2d&quot)</code>. The only parameter you can feed into the function at the moment is &quot2d&quot but it is reserved for new functionallity in the future. Also note that the style and colour properties in the canvas context uses CSS syntax so you can write &quotLime&quot, &quotrgb(0,255,0)&quot, &quot#00FF00&quot or any other CSS like style for the same colour.</p><p><h4>Exercises</h5> <ul><li>Try changing the colour of the square.</li><li>Play around with putting different co-ordinates into the <code>ctx.fillRect()</code> function.</li></ul>",			
 			"source": "js/examples/myFirstCanvas.js",
 			"autorun": false
 		},

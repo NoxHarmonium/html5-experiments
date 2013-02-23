@@ -9,7 +9,7 @@ var canvasExamples =
 		var row 		= $("<div class='row-fluid'>");
 
 		var description	= $("<div class='row-fluid'><div class='span11'><h3></h3><p class='description'></p><br></div><div class='span1'/></div>");
-		description.find("p").text(options.description);
+		description.find("p").html(options.description);
 		description.find("h3").text(options.title);
 		description.find("h3").attr("id","heading_"+ options.id);
 				
